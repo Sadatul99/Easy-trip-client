@@ -1,7 +1,24 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
 
 
 const SignIn = () => {
+    
+    const {signInWithEmail} =useContext(AuthContext)
+
+    const handleSignIn = e =>{
+        e.preventDefault()
+        const form = e.target
+        const email = form.email.value
+        const password = form.password.value
+        console.log(email, password)
+
+        signInWithEmail(email, password)
+        .then(result=> console.log(result))
+        .catch(error=> console.error(error))
+    }
+
     return (
         <div>
             <div
@@ -16,7 +33,7 @@ const SignIn = () => {
             >
                 <div className="bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg p-8 rounded-lg shadow-lg max-w-sm w-full">
                     <h2 className="text-2xl font-bold text-white text-center mb-6">Please Login</h2>
-                    <form >
+                    <form onSubmit={handleSignIn}>
                         <div className="mb-4">
                             <label className="block text-white text-sm font-semibold mb-2">Email</label>
                             <input
