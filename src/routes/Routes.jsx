@@ -2,12 +2,13 @@ import { createBrowserRouter } from "react-router-dom";
 import Root from "../layouts/Root";
 import ErrorPage from "../pages/ErrorPage";
 import Home from "../pages/Home/Home";
-import TouristsSpot from "../pages/TouristsSpot";
+import TouristsSpots from "../pages/TouristsSpots";
 import AddTouristsSpot from "../pages/AddTouristsSpot";
 import MyList from "../pages/MyList"
 import SignIn from "../pages/SignIn"
 import SignUp from "../pages/SignUp"
 import UpdateSpot from "../pages/UpdateSpot"
+import SpotDetails from "../pages/SpotDetails";
 
 const router = createBrowserRouter([
     {
@@ -20,11 +21,17 @@ const router = createBrowserRouter([
             element: <Home></Home>
         },
         {
-            path:"/touristsspot",
-            element: <TouristsSpot></TouristsSpot>
+            path:"/tourists-spots",
+            element: <TouristsSpots></TouristsSpots>,
+            loader: ()=> fetch('http://localhost:5000/tourists-spots')
         },
         {
-            path:"/addtoristsspot",
+            path:"/tourists-spots/:id",
+            element: <SpotDetails></SpotDetails>,
+            loader :({params})=> fetch(`http://localhost:5000/tourists-spots/${params.id}`)
+        },
+        {
+            path:"/add-torists-spot",
             element: <AddTouristsSpot></AddTouristsSpot>
         },
         {

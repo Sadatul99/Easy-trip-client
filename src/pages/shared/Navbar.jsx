@@ -6,12 +6,15 @@ import { AuthContext } from "../../providers/AuthProvider";
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
 
-    const navLinks = <>
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/'>Tourists Spot</Link></li>
-        <li><Link to='/'>Add Spot</Link></li>
-        <li><Link to='/'>My List</Link></li>
-    </>
+    const navLinks = (
+        <>
+            <li><Link to='/' className="text-gray-700 font-bold hover:text-blue-500 transition duration-200">Home</Link></li>
+            <li><Link to='/tourists-spots' className="text-gray-700 font-bold hover:text-blue-500 transition duration-200">Tourists Spots</Link></li>
+            <li><Link to='/add-torists-spot' className="text-gray-700 font-bold hover:text-blue-500 transition duration-200">Add Spot</Link></li>
+            <li><Link to='/my-list' className="text-gray-700 font-bold hover:text-blue-500 transition duration-200">My List</Link></li>
+        </>
+    );
+    
 
     const handleLogout = () => {
         logOut()
@@ -44,7 +47,11 @@ const Navbar = () => {
                         {navLinks}
                     </ul>
                 </div>
-                <a className="text-2xl font-bold">Easy Trip</a>
+
+                <Link to="/" className="text-2xl font-bold text-blue-600 hover:text-blue-700 transition duration-200">
+                    Easy Trip
+                </Link>
+
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -65,9 +72,18 @@ const Navbar = () => {
                         </div>
                         :
                         <div className="flex gap-3">
-                            <Link to="/signin"><button className="btn">Login</button></Link>
-                            <Link to="/signup"><button className="btn">Register</button></Link>
+                            <Link to="/signin">
+                                <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                    Login
+                                </button>
+                            </Link>
+                            <Link to="/signup">
+                                <button className="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition duration-200 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                                    Register
+                                </button>
+                            </Link>
                         </div>
+
                 }
 
             </div>
