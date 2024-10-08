@@ -9,6 +9,7 @@ import SignIn from "../pages/SignIn"
 import SignUp from "../pages/SignUp"
 import UpdateSpot from "../pages/UpdateSpot"
 import SpotDetails from "../pages/SpotDetails";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -32,11 +33,12 @@ const router = createBrowserRouter([
         },
         {
             path:"/add-torists-spot",
-            element: <AddTouristsSpot></AddTouristsSpot>
+            element: <PrivateRoute><AddTouristsSpot></AddTouristsSpot></PrivateRoute>
         },
         {
-            path:"/mylist",
-            element: <MyList></MyList>
+            path:"/my-list",
+            element: <PrivateRoute><MyList></MyList></PrivateRoute>,
+            loader: ()=> fetch('http://localhost:5000/tourists-spots')
         },
         {
             path:"/signin",

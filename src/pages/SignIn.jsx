@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
-import { FaEye , FaEyeSlash} from "react-icons/fa";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const SignIn = () => {
-    
-    const {signInWithEmail} =useContext(AuthContext)
+
+    const { signInWithEmail } = useContext(AuthContext)
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -13,7 +13,11 @@ const SignIn = () => {
         setShowPassword((prev) => !prev);
     };
 
-    const handleSignIn = e =>{
+    // Using location we can know from where it came from
+    const location = useLocation()
+    const navigate = useNavigate()
+
+    const handleSignIn = e => {
         e.preventDefault()
         const form = e.target
         const email = form.email.value
@@ -21,15 +25,19 @@ const SignIn = () => {
         console.log(email, password)
 
         signInWithEmail(email, password)
-        .then(result=> console.log(result))
-        .catch(error=> console.error(error))
+            .then(result => {
+                console.log(result)
+                // Navigate after login
+                navigate(location?.state ? location.state : '/')
+            })
+            .catch(error => console.error(error))
     }
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
             <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
                 <h2 className="text-2xl font-bold text-blue-600 text-center mb-6">Please Login</h2>
-                
+
                 <form onSubmit={handleSignIn}>
                     {/* Email Input */}
                     <div className="mb-4">
@@ -53,9 +61,9 @@ const SignIn = () => {
                             className="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
                             placeholder="Enter your password"
                         />
-                        <button 
-                            type="button" 
-                            onClick={togglePasswordVisibility} 
+                        <button
+                            type="button"
+                            onClick={togglePasswordVisibility}
                             className="absolute top-[53px] right-0 transform -translate-y-1/2 pr-3"
                         >
                             {showPassword ? (
