@@ -1,9 +1,13 @@
+import AboutUs from "./AboutUs";
+import Banner from "./Banner";
 
 
 const Home = () => {
     return (
-        <div className="min-h-screen">
-            This is Home
+        <div className="min-h-screen space-y-10">
+            
+            <Banner></Banner>
+            <AboutUs></AboutUs>
         </div>
     );
 };

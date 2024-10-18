@@ -20,7 +20,7 @@ const AddTouristsSpot = () => {
         const newSpot = {name,email,image,spotName,countryName,location,avgCost,seasonality,travelTime,totalVisitorsPerYear,description}
 
         //send data to the server
-        fetch('http://localhost:5000/tourists-spot',{
+        fetch('http://localhost:5000/tourists-spots',{
             method:"POST",
             headers:{'content-type':'application/json'},
             body: JSON.stringify(newSpot)
